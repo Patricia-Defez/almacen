@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="642.0" prefWidth="957.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="almacen.InterfazController">
+   <top>
+      <HBox prefHeight="60.0" prefWidth="957.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="972.0" text="Gestión de Almacén">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </top>
+   <left>
+      <VBox alignment="CENTER" prefHeight="575.0" prefWidth="173.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="bt_cargar_panel_art" mnemonicParsing="false" onAction="#cargar_panel_art" prefHeight="31.0" prefWidth="160.0" text="Gestión Artículos">
+               <VBox.margin>
+                  <Insets bottom="30.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="bt_cargar_panel_prov" alignment="CENTER" mnemonicParsing="false" onAction="#cargar_panel_prov" prefHeight="31.0" prefWidth="160.0" text="Gestión Proveedores">
+               <VBox.margin>
+                  <Insets bottom="30.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="bt_informe_art" mnemonicParsing="false" onAction="#crearInformeArt" prefHeight="31.0" prefWidth="161.0" text="Informe Artículos">
+               <VBox.margin>
+                  <Insets bottom="30.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="bt_informe_ped" mnemonicParsing="false" onAction="#crearInformePed" prefHeight="31.0" prefWidth="160.0" text="Informe Pedidos">
+               <VBox.margin>
+                  <Insets bottom="100.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="bt_salir" alignment="CENTER" mnemonicParsing="false" onAction="#salir" prefHeight="31.0" prefWidth="160.0" text="Salir">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+         <cursor>
+            <Cursor fx:constant="SW_RESIZE" />
+         </cursor>
+      </VBox>
+   </left>
+   <right>
+      <VBox alignment="CENTER" prefHeight="582.0" prefWidth="301.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextArea fx:id="txt_Area" prefHeight="441.0" prefWidth="291.0">
+               <VBox.margin>
+                  <Insets left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </TextArea>
+            <Button fx:id="bt_listar_art" mnemonicParsing="false" onAction="#listar_art" prefHeight="31.0" prefWidth="146.0" text="Listar Artículos">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="bt_listar_prov" mnemonicParsing="false" onAction="#listar_prov" text="Listar proveedores">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="bt_listar_ped" mnemonicParsing="false" onAction="#listar_ped" prefHeight="31.0" prefWidth="143.0" text="Listar Pedidos">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+   </right>
+   <center>
+      <VBox fx:id="contenido" alignment="CENTER" prefHeight="582.0" prefWidth="498.0" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>

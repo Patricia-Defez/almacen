@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="txt_nombre_prov" prefHeight="546.0" prefWidth="457.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="almacen.controladores.Panel_proveController">
+   <children>
+      <Label layoutX="78.0" layoutY="28.0" prefHeight="35.0" prefWidth="271.0" text="Gestión de Proveedores">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="51.0" layoutY="122.0" text="Nombre" />
+      <Label layoutX="48.0" layoutY="167.0" text="Teléfono" />
+      <Label layoutX="51.0" layoutY="200.0" text="CIF" />
+      <TextField fx:id="txt_name_prov" layoutX="191.0" layoutY="117.0" />
+      <TextField fx:id="txt_telef_prov" layoutX="191.0" layoutY="162.0" />
+      <TextField fx:id="txt_CIF_prov" layoutX="191.0" layoutY="200.0" />
+      <Button fx:id="bt_alta_prov" layoutX="53.0" layoutY="242.0" mnemonicParsing="false" onAction="#alta_prov" text="Alta" />
+      <Button fx:id="bt_update_prov" layoutX="125.0" layoutY="242.0" mnemonicParsing="false" onAction="#update_prov" text="Modificar" />
+      <Button fx:id="bt_delete_prov" layoutX="236.0" layoutY="242.0" mnemonicParsing="false" onAction="#delete_prov" text="Baja" />
+      <Separator layoutX="38.0" layoutY="288.0" prefHeight="6.0" prefWidth="369.0" />
+      <Button fx:id="bt_search_prov" layoutX="317.0" layoutY="242.0" mnemonicParsing="false" onAction="#search_prov" text="Buscar" />
+      <Label layoutX="78.0" layoutY="317.0" text="ID Articulo" />
+      <Label layoutX="79.0" layoutY="359.0" text="Precio" />
+      <TextField fx:id="txt_id_Art" layoutX="186.0" layoutY="312.0" prefHeight="31.0" prefWidth="135.0" />
+      <TextField fx:id="txt_price_art" layoutX="186.0" layoutY="354.0" prefHeight="31.0" prefWidth="135.0" />
+      <Button fx:id="bt_alta_art_prov" layoutX="61.0" layoutY="397.0" mnemonicParsing="false" onAction="#alta_art_prov" text="Alta" />
+      <Button fx:id="bt_update_art_prov" layoutX="125.0" layoutY="397.0" mnemonicParsing="false" onAction="#update_art_prov" text="Modificar" />
+      <Button fx:id="bt_delete_art_prov" layoutX="236.0" layoutY="397.0" mnemonicParsing="false" onAction="#delete_art_prov" text="Baja" />
+      <Button fx:id="bt_search_art_prov" layoutX="317.0" layoutY="397.0" mnemonicParsing="false" onAction="#search_art_prov" text="Buscar" />
+      <Label layoutX="55.0" layoutY="81.0" text="ID" />
+      <TextField fx:id="txt_id_prov" layoutX="191.0" layoutY="76.0" />
+      <TextArea fx:id="messages" layoutX="60.0" layoutY="449.0" prefHeight="60.0" prefWidth="325.0" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="549.0" prefWidth="425.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="almacen.controladores.Panel_articController">
+   <children>
+      <Label layoutX="99.0" layoutY="28.0" text="Gestión de Articulos">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="40.0" layoutY="136.0" text="Nombre" />
+      <Label layoutX="42.0" layoutY="187.0" text="Descripción" />
+      <Label layoutX="44.0" layoutY="236.0" text="Stock" />
+      <Label layoutX="46.0" layoutY="280.0" text="Stock mínimo" />
+      <TextField fx:id="txt_name_art" layoutX="169.0" layoutY="131.0" />
+      <TextField fx:id="txt_descr_art" layoutX="168.0" layoutY="182.0" />
+      <TextField fx:id="txt_stock_art" layoutX="169.0" layoutY="231.0" />
+      <TextField fx:id="txt_minim_art" layoutX="168.0" layoutY="275.0" />
+      <Button fx:id="bt_alta_art" layoutX="44.0" layoutY="317.0" mnemonicParsing="false" onAction="#alta_art" text="Alta" />
+      <Button fx:id="bt_update_art" layoutX="127.0" layoutY="317.0" mnemonicParsing="false" onAction="#update_art" text="Modificar" />
+      <Button fx:id="bt_delete_art" layoutX="238.0" layoutY="317.0" mnemonicParsing="false" onAction="#delete_art" text="Baja" />
+      <Button fx:id="bt_search_art" layoutX="306.0" layoutY="317.0" mnemonicParsing="false" onAction="#search_art" text="Buscar" />
+      <Separator layoutX="26.0" layoutY="364.0" prefHeight="6.0" prefWidth="369.0" />
+      <TextField fx:id="txt_id_art" layoutX="169.0" layoutY="79.0" />
+      <Label layoutX="46.0" layoutY="84.0" text="ID" />
+      <TextField fx:id="txt_unid_drop_art" layoutX="242.0" layoutY="387.0" prefHeight="31.0" prefWidth="64.0" />
+      <Label layoutX="316.0" layoutY="392.0" prefHeight="21.0" prefWidth="78.0" text="unidades" />
+      <Button fx:id="bt_drop_art" layoutX="27.0" layoutY="387.0" mnemonicParsing="false" onAction="#update_art_stock" prefHeight="31.0" prefWidth="200.0" text="Entrada/Salida de almacén" />
+      <TextArea fx:id="messages" layoutX="30.0" layoutY="439.0" prefHeight="60.0" prefWidth="360.0" />
+   </children>
+</AnchorPane>
