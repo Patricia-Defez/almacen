@@ -35,6 +35,6 @@
       <Button fx:id="bt_search_art_prov" layoutX="317.0" layoutY="397.0" mnemonicParsing="false" onAction="#search_art_prov" text="Buscar" />
       <Label layoutX="55.0" layoutY="81.0" text="ID" />
       <TextField fx:id="txt_id_prov" layoutX="191.0" layoutY="76.0" />
-      <TextArea fx:id="messages" layoutX="60.0" layoutY="449.0" prefHeight="60.0" prefWidth="325.0" />
+      <TextArea fx:id="messages" layoutX="60.0" layoutY="449.0" prefHeight="85.0" prefWidth="325.0" />
    </children>
 </AnchorPane>

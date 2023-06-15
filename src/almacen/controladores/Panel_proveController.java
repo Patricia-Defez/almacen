@@ -5,7 +5,9 @@
  */
 package almacen.controladores;
 
+import almacen.modelos.Articulo;
 import almacen.modelos.ArticuloProveedor;
+import almacen.modelos.GestionDB_Art;
 import almacen.modelos.GestionDB_ArtProv;
 import almacen.modelos.GestionDB_Prov;
 import almacen.modelos.Proveedor;
@@ -134,6 +136,8 @@ public class Panel_proveController implements Initializable {
         }else{
             messages.setText("");
             int resp = gDbProv.borrarProvPorId(txt_id_prov.getText());
+            GestionDB_ArtProv gDbArtProv = new GestionDB_ArtProv();
+            gDbArtProv.borrarArtProvPorIdProv(txt_id_prov.getText());
             if(resp == 1){
                 messages.setText("");
                 messages.setText("Proveedor borrado corectamente");
@@ -168,22 +172,35 @@ public class Panel_proveController implements Initializable {
 
     @FXML
     private void alta_art_prov(ActionEvent event) {
-        GestionDB_ArtProv gDbArtProv = new GestionDB_ArtProv();
-        ArticuloProveedor ArtProv = new ArticuloProveedor();
-            ArtProv.setIdArt(txt_id_Art.getText());
-            ArtProv.setIdProv(txt_id_prov.getText());
-            ArtProv.setPrecio(Float.valueOf(txt_price_art.getText()));
-            int resp = gDbArtProv.insertarArtProv(ArtProv);
-
-            if(resp == 1){
-                messages.setText("");
-                messages.setText("Precio articulo insertado corectamente");
-                txt_id_Art.setText("");
-                txt_price_art.setText("");
+        GestionDB_Prov gDbProv = new GestionDB_Prov();
+        GestionDB_Art gDbArt = new GestionDB_Art();
+        Articulo art = gDbArt.buscarArtPorId(txt_id_Art.getText());
+        Proveedor prov = gDbProv.buscarProvPorId(txt_id_prov.getText());
+        if(art == null || prov == null){
+            messages.setText("Compruebe que las referencias son correctas");
+        }else{
+            GestionDB_ArtProv gDbArtProv = new GestionDB_ArtProv();
+            ArticuloProveedor ArtProv = new ArticuloProveedor();
+            ArticuloProveedor ArtProvDB = gDbArtProv.buscarArtProvPorIds(txt_id_prov.getText(),txt_id_Art.getText());
+            if(ArtProvDB != null){
+                messages.setText("Ya existe un precio articulo con esa referencia para el proveedor seleccionado");            
             }else{
-                messages.setText("");
-                messages.setText("No ha podido insertarse el precio articulo en la base de datos");
+                ArtProv.setIdArt(txt_id_Art.getText());
+                ArtProv.setIdProv(txt_id_prov.getText());
+                ArtProv.setPrecio(Float.valueOf(txt_price_art.getText()));
+                int resp = gDbArtProv.insertarArtProv(ArtProv);
+
+                if(resp == 1){
+                    messages.setText("");
+                    messages.setText("Precio articulo insertado corectamente");
+                    txt_id_Art.setText("");
+                    txt_price_art.setText("");
+                }else{
+                    messages.setText("");
+                    messages.setText("No ha podido insertarse el precio articulo en la base de datos");
+                }
             }
+        }    
     }
 
     @FXML
@@ -214,7 +231,7 @@ public class Panel_proveController implements Initializable {
         GestionDB_ArtProv gDbArtProv = new GestionDB_ArtProv();
         ArticuloProveedor ArtProvDB = gDbArtProv.buscarArtProvPorIds(txt_id_prov.getText(),txt_id_Art.getText());
         if(ArtProvDB == null){
-            messages.setText("No existe un precio articulo con esa referencia para el proveedor seleccionado");
+            messages.setText("No existe un precio articulo con esa referencia \npara el proveedor seleccionado");
             txt_price_art.setText("");            
         }else{
             messages.setText("");

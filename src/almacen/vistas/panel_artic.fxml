@@ -32,6 +32,6 @@
       <TextField fx:id="txt_unid_drop_art" layoutX="242.0" layoutY="387.0" prefHeight="31.0" prefWidth="64.0" />
       <Label layoutX="316.0" layoutY="392.0" prefHeight="21.0" prefWidth="78.0" text="unidades" />
       <Button fx:id="bt_drop_art" layoutX="27.0" layoutY="387.0" mnemonicParsing="false" onAction="#update_art_stock" prefHeight="31.0" prefWidth="200.0" text="Entrada/Salida de almacén" />
-      <TextArea fx:id="messages" layoutX="30.0" layoutY="439.0" prefHeight="60.0" prefWidth="360.0" />
+      <TextArea fx:id="messages" layoutX="30.0" layoutY="439.0" prefHeight="87.0" prefWidth="360.0" />
    </children>
 </AnchorPane>

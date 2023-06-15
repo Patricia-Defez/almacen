@@ -1,7 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Modulo: PROYECTO DAM ABRIL
+ * Proyecto: Almacen
+ * Archivo: InterfazController.java
+ * Objetivo: Realizar una aplicación para la gestión de Articulos y Proveedores de un almacén.
  */
 package almacen;
 
@@ -27,31 +28,74 @@ import java.util.HashMap;
 import javafx.stage.Stage;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.fxutils.viewer.JasperViewerFX;
+
 /**
  * FXML Controller class
- *
- * @author ptddd
+ * Controlador encargado de la gestión de la ventana principal
+ * 
+ * @author Patricia Defez Díaz de Sarralde
+ * 
+ * @version 1.0.0
  */
 public class InterfazController implements Initializable {
-
+    
+    /**
+     * Botón utilizado para cargar el panel de Gestión de Articulos
+     */
     @FXML
     private Button bt_cargar_panel_art;
+    
+    /**
+     * Botón utilizado para cargar el panel de Gestión de Proveedores
+     */
     @FXML
     private Button bt_cargar_panel_prov;
+    
+    /**
+     * Botón utilizado para la generación del informe de artículos
+     */
     @FXML
     private Button bt_informe_art;
+    
+    /**
+     * Botón utilizado para la generación del informe de proveedores
+     */
     @FXML
     private Button bt_informe_ped;
+    
+    /**
+     * Botón utilizado para cerrar la aplicación
+     */
     @FXML
     private Button bt_salir;
+    
+    /**
+     * Contenedor usado para cargar los paneles
+     */
     @FXML
     private VBox contenido;
+    
+    /**
+     * Botón utilizado para listar todos los artículos de la base de datos
+     */
     @FXML
     private Button bt_listar_art;
+    
+    /**
+     * Botón utilizado para listar todos los proveedores de la base de datos
+     */
     @FXML
     private Button bt_listar_prov;
+    
+    /**
+     * Botón utilizado para listar todos los pedidos de la base de datos
+     */
     @FXML
     private Button bt_listar_ped;
+    
+    /**
+     * Area de texto que mostrará los listados
+     */
     @FXML
     private TextArea txt_Area;
     
@@ -59,11 +103,19 @@ public class InterfazController implements Initializable {
     private ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
 
     /**
-     * Initializes the controller class.
+     * Método de inicialización del controlador
+     * 
+     * @param url Ubicación utilizada para resolver rutas relativas para el objeto raíz,
+     * o null si no se conoce la ubicación.
+     * 
+     * @param rb Recursos utillizados para localizar el objeto raíz, o null si el objeto 
+     * raíz no se localizó.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        //La aplicación se inicializa con el panel de gestión de articulos cargado
         cargarPanel("panel_artic.fxml");
+        
         GestionDB_Art gDbArt = new GestionDB_Art();
         articulos = gDbArt.crearArrayArticulos();
 
@@ -77,18 +129,39 @@ public class InterfazController implements Initializable {
         //Collections.sort(pedidos);
 
         // TODO
-    }    
-
+    }  
+    
+    /**
+     * Método para cargar el panel de Gestión de Articulos
+     * Arroja una excepción de tipo Exception si no se no se accedan al ficheros necesario para ello
+     *
+     * @param event Recoge el evento click vinculado botón bt_cargar_panel_art
+     * 
+     */
     @FXML
     private void cargar_panel_art(ActionEvent event) throws Exception{
         cargarPanel("panel_artic.fxml");
     }
-
+    
+    /**
+     * Método para cargar el panel de Gestión de Proveedores
+     * Arroja una excepción de tipo Exception si no se no se accedan al ficheros necesario para ello
+     *
+     * @param event Recoge el evento click vinculado botón bt_cargar_panel_prov
+     * 
+     */
     @FXML
     private void cargar_panel_prov(ActionEvent event) throws Exception{
         cargarPanel("panel_prove.fxml");
     }
-   
+    
+    /**
+     * Método para crear el informe de los articulos en almacén
+     * Maneja la excepción de tipo Exception si no se crea correctamente el informe
+     * 
+     * @param event Recoge el evento click vinculado al botón bt_matric_DI
+     * 
+     */
     @FXML
     private void crearInformeArt(ActionEvent event){
         try {
@@ -187,14 +260,22 @@ public class InterfazController implements Initializable {
         }
     }
     
-    
+    /**
+     * Método para cargar un panel en el contenedor contenido
+     * Maneja la excepción de tipo Exception si no se realiza correctamente la tarea
+     * 
+     * @param panel String correspondiente al nombre del fichero del panel cargado
+     * 
+     */
     private void cargarPanel(String panel){
+        //Se elimina el panel anterior
         contenido.getChildren().clear();
         
         URL url = getClass().getResource("vistas/"+panel);
         
         try {
             Node nodo = FXMLLoader.load(url);
+            //Se carga el nuevo panel
             contenido.getChildren().add(nodo);
             System.out.println("Cargando el panel"+panel);
         }

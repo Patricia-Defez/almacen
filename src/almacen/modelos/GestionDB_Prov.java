@@ -24,12 +24,10 @@ public class GestionDB_Prov {
     public int insertarProveedor(Proveedor proveedor){
         int resp = 0;
         try{
-            //se abre la base de datos
-                              
+            //se abre la base de datos                              
             odb = ODBFactory.open(DB_NAME);
             //Se almacena el proveedor                   
-            odb.store(proveedor);
-            
+            odb.store(proveedor);           
             resp = 1;
         }
         catch (Exception ex){
@@ -41,8 +39,7 @@ public class GestionDB_Prov {
                 odb.close();
             }
             return  resp;
-        }
-        
+        }       
     }
     
     public Proveedor buscarProvPorId(String id){

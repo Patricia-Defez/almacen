@@ -25,7 +25,7 @@ public class GestionDB_Ped {
         try{
             //se abre la base de datos                   
             odb = ODBFactory.open(DB_NAME);
-            //Se almacena el articulo                   
+            //Se almacena el pedido                   
             odb.store(pedido);            
             resp = 1;
         }
@@ -47,8 +47,7 @@ public class GestionDB_Ped {
              //se abre la base de datos
             odb = ODBFactory.open(DB_NAME);
             IQuery query = new CriteriaQuery(Pedido.class);
-            Objects<Pedido> lista = odb.getObjects(query);
-            
+            Objects<Pedido> lista = odb.getObjects(query);           
             Pedido ped = new Pedido();
             while (lista.hasNext()){
                 ped = lista.next();

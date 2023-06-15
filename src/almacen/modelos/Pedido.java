@@ -155,7 +155,7 @@ public class Pedido implements Comparable<Pedido> {
 
     @Override
     public String toString() {
-        return  "\tid Art: " + idArt + "\tdescripcion Art: " + descripcionArt + "\tid Prov: " + idProv + "\tnombre Prov: " + nombreProv + "\tCIF Prov: " + CIFProv + "\tprecio unidad: " + precioUnidad + "\tfecha: " + fecha;
+        return  "id Art: " + idArt + "\tdescripcion Art: " + descripcionArt + "\tid Prov: " + idProv + "\tnombre Prov: " + nombreProv + "\tCIF Prov: " + CIFProv + "\tprecio unidad: " + precioUnidad + "\tfecha: " + fecha;
     }
 
     @Override

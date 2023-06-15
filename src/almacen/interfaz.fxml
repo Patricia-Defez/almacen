@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="642.0" prefWidth="957.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="almacen.InterfazController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="642.0" prefWidth="1011.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="almacen.InterfazController">
    <top>
       <HBox prefHeight="60.0" prefWidth="957.0" BorderPane.alignment="CENTER">
          <children>
@@ -55,9 +55,9 @@
       </VBox>
    </left>
    <right>
-      <VBox alignment="CENTER" prefHeight="582.0" prefWidth="301.0" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="582.0" prefWidth="422.0" BorderPane.alignment="CENTER">
          <children>
-            <TextArea fx:id="txt_Area" prefHeight="441.0" prefWidth="291.0">
+            <TextArea fx:id="txt_Area" prefHeight="441.0" prefWidth="364.0">
                <VBox.margin>
                   <Insets left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
@@ -81,6 +81,6 @@
       </VBox>
    </right>
    <center>
-      <VBox fx:id="contenido" alignment="CENTER" prefHeight="582.0" prefWidth="498.0" BorderPane.alignment="CENTER" />
+      <VBox fx:id="contenido" alignment="CENTER" prefHeight="582.0" prefWidth="470.0" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>

@@ -49,7 +49,7 @@ public class Panel_articController implements Initializable {
     @FXML
     private TextField txt_id_art;
     @FXML
-    private TextField txt_unid_art;
+    private TextField txt_unid_drop_art;
     @FXML
     private Button bt_drop_art;
     @FXML
@@ -62,7 +62,12 @@ public class Panel_articController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-
+    /**
+     * Método para insertar en la base de datos objetos de la clase Articulo
+     *
+     * @param event Recoge el evento click vinculado botón bt_alta_art
+     * 
+     */
     @FXML
     private void alta_art(ActionEvent event) {
         GestionDB_Art gDbArt = new GestionDB_Art();
@@ -135,6 +140,8 @@ public class Panel_articController implements Initializable {
         }else{
             messages.setText("");
             int resp = gDbArt.borrarArtPorId(txt_id_art.getText());
+            GestionDB_ArtProv gDbArtProv = new GestionDB_ArtProv();
+            gDbArtProv.borrarArtProvPorIdArt(txt_id_art.getText());
             if(resp == 1){
                 messages.setText("");
                 messages.setText("Articulo borrado corectamente");
@@ -174,41 +181,63 @@ public class Panel_articController implements Initializable {
     @FXML
     private void update_art_stock(ActionEvent event){
         GestionDB_Art gDbArt = new GestionDB_Art();
-        Articulo art = gDbArt.buscarArtPorId(txt_id_art.getText());
+        String id = txt_id_art.getText();
+        Articulo art = gDbArt.buscarArtPorId(id);
         if(art == null){
             messages.setText("No existe un articulo con esa referencia");
         }else{
-            int cantidad = Integer.parseInt(txt_unid_art.getText());
+            int cantidad = Integer.parseInt(txt_unid_drop_art.getText());
             int stock = art.getStock()+ cantidad;
             if (stock < 0){
                 messages.setText("No existe stock suficiente del articulo");
             }else if(stock <= art.getMinimo()){
                 GestionDB_ArtProv gDbArtProv = new GestionDB_ArtProv();
-                GestionDB_Prov gDbProv = new GestionDB_Prov();
                 ArticuloProveedor ArtProv = new ArticuloProveedor();
                 ArtProv = gDbArtProv.compararPreciosPorIdArt(art.getIdArt());
                 if (ArtProv == null){
                     messages.setText("No existe proveedor para ese articulo,\nes necesario dar de alta uno");
                 }else{
-                    art.setStock(stock);
-                    Pedido ped = new Pedido();
-                    ped.setIdArt(art.getIdArt());
-                    ped.setDescripcionArt(art.getDescripcionArt());
-                    ped.setIdProv(ArtProv.getIdProv());
-                    Proveedor prov = gDbProv.buscarProvPorId(ArtProv.getIdProv());
-                    ped.setNombreProv(prov.getNombre());
-                    ped.setCIFProv(prov.getCIF());
-                    ped.setPrecioUnidad(ArtProv.getPrecio());
-                    ped.setCantidad(art.getMinimo() *2);
-                    GestionDB_Ped gDbPed = new GestionDB_Ped();
-                    gDbPed.insertarPedido(ped);
-                    messages.setText("El stock del articulo ha llegado al minimo preestablecido,\nse ordena la realización del pedido correspondiente.");
+                    int resp = gDbArt.modificarStock(id, cantidad);
+                    if(resp == 1){
+                        txt_unid_drop_art.setText("");
+                        messages.setText("Se modifica el stock del articulo.\n");
+                        alta_pedido(art, ArtProv);
+                    }else{
+                        messages.setText("No se ha podido modificar el stock del articulo");
+                    }    
                }
             }else{
-                art.setStock(stock);
-                messages.setText("Se modifica el stock del articulo");
+                int resp = gDbArt.modificarStock(id, cantidad);
+                if(resp == 1){
+                    txt_unid_drop_art.setText("");
+                    messages.setText("Se modifica el stock del articulo");
+                }else{
+                    messages.setText("No se ha podido modificar el stock del articulo");
+                } 
             }
         }
     }
     
+    
+    private void  alta_pedido(Articulo art, ArticuloProveedor ArtProv){
+        Pedido ped = new Pedido();
+        GestionDB_Prov gDbProv = new GestionDB_Prov();
+        Proveedor prov = gDbProv.buscarProvPorId(ArtProv.getIdProv());
+        ped.setIdArt(art.getIdArt());
+        ped.setDescripcionArt(art.getDescripcionArt());
+        ped.setIdProv(ArtProv.getIdProv());        
+        ped.setNombreProv(prov.getNombre());
+        ped.setCIFProv(prov.getCIF());
+        ped.setPrecioUnidad(ArtProv.getPrecio());
+        ped.setCantidad(art.getMinimo() *4);
+        GestionDB_Ped gDbPed = new GestionDB_Ped();
+        int resp = gDbPed.insertarPedido(ped);
+        if(resp == 1){ 
+            messages.appendText("El stock del articulo ha llegado al minimo preestablecido,"
+                    + "\nse ordena el pedido correspondiente.");
+        }else{
+            messages.appendText("El stock del articulo ha llegado al minimo preestablecido,"
+                    + "\npero no se ha podido ordenar el pedido correspondiente.");
+        }
+    }
 }

@@ -1,7 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Modulo: PROYECTO DAM ABRIL
+ * Proyecto: Almacen
+ * Archivo: GestionDB_Art.java
+ * Objetivo: Realizar una aplicación para la gestión de Articulos y Proveedores de un almacén.
  */
 package almacen.modelos;
 
@@ -15,22 +16,24 @@ import org.neodatis.odb.core.query.criteria.Where;
 import org.neodatis.odb.impl.core.query.criteria.CriteriaQuery;
 
 /**
- *
- * @author ptddd
+ * GestionDB_Art class
+ * Fichero encargado de la gestión de la colección Articulo de la base de datos
+ * 
+ * @author Patricia Defez Díaz de Sarralde
+ * 
+ * @version 1.0.0
  */
 public class GestionDB_Art {
     ODB odb = null;
-    String desktop = System.getProperty("user.home")+ File.separator + "Desktop";
     String DB_NAME = "almacenDB"; 
+    
     public int insertarArticulo(Articulo articulo){
         int resp = 0;
         try{
-            //se abre la base de datos
-                              
+            //se abre la base de datos                              
             odb = ODBFactory.open(DB_NAME);
             //Se almacena el articulo                   
-            odb.store(articulo);
-            
+            odb.store(articulo);            
             resp = 1;
         }
         catch (Exception ex){
@@ -141,9 +144,11 @@ public class GestionDB_Art {
     public int modificarStock(String id, int cantidad){
         int resp = 0;
         try{
-            Articulo artDB = buscarArtPorId(id);          
-            artDB.setStock(artDB.getStock()+ cantidad);
             odb = ODBFactory.open(DB_NAME);
+            IQuery query = new CriteriaQuery(Articulo.class, Where.equal("idArt", id));
+            Articulo artDB = (Articulo) odb.getObjects(query).getFirst();
+            int stockInic = artDB.getStock();
+            artDB.setStock(stockInic + cantidad);            
             odb.store(artDB);
             resp = 1;
             
