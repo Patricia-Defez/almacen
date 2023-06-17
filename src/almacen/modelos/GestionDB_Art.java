@@ -8,6 +8,7 @@ package almacen.modelos;
 
 import java.io.File;
 import java.util.ArrayList;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.neodatis.odb.ODB;
 import org.neodatis.odb.ODBFactory;
 import org.neodatis.odb.Objects;
@@ -165,7 +166,7 @@ public class GestionDB_Art {
     }
     
     public ArrayList<Articulo> crearArrayArticulos(){
-        ArrayList<Articulo> array = new ArrayList<Articulo>();
+        ArrayList<Articulo> articulos = new ArrayList<Articulo>();
          try{
              //se abre la base de datos
             odb = ODBFactory.open(DB_NAME);
@@ -175,8 +176,10 @@ public class GestionDB_Art {
             Articulo art = new Articulo();
             while (lista.hasNext()){
                 art = lista.next();
-                array.add(art);
+                articulos.add(art);
             }
+            JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(articulos);
+            
           } 
          catch (Exception ex){
             System.out.println("Se ha producido un error al leer los articulos: " + ex);
@@ -187,6 +190,6 @@ public class GestionDB_Art {
                 odb.close();
             }   
           }
-        return  array;
+        return  articulos;
     }
 }

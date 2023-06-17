@@ -22,6 +22,7 @@ import almacen.modelos.GestionDB_Art;
 import almacen.modelos.GestionDB_Ped;
 import almacen.modelos.GestionDB_Prov;
 import almacen.modelos.Pedido;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -99,8 +100,7 @@ public class InterfazController implements Initializable {
     @FXML
     private TextArea txt_Area;
     
-    private ArrayList<Articulo> articulos = new ArrayList<Articulo>();
-    private ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
+     
 
     /**
      * Método de inicialización del controlador
@@ -113,22 +113,9 @@ public class InterfazController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //La aplicación se inicializa con el panel de gestión de articulos cargado
+        //La aplicación se inicializa con el panel de gestión
         cargarPanel("panel_artic.fxml");
-        
-        GestionDB_Art gDbArt = new GestionDB_Art();
-        articulos = gDbArt.crearArrayArticulos();
 
-       articulos = gDbArt.crearArrayArticulos();
-       for (Articulo art: articulos){
-           System.out.println(art.toString());
-       }
-        
-        //GestionDB_Ped gDbPed = new GestionDB_Ped();
-        //pedidos = gDbPed.crearArrayPedidos();
-        //Collections.sort(pedidos);
-
-        // TODO
     }  
     
     /**
@@ -164,49 +151,74 @@ public class InterfazController implements Initializable {
      */
     @FXML
     private void crearInformeArt(ActionEvent event){
-        try {
-            //Definimos la coleccion de datos sobre la que se creará el informe
-             GestionDB_Art gDbArt = new GestionDB_Art();
-            articulos = gDbArt.crearArrayArticulos();
-            //Collections.sort(articulos);
+        //Definimos la coleccion de datos sobre la que se creará el informe
+        ArrayList<Articulo> articulos = new ArrayList<Articulo>();
+        GestionDB_Art gDbArt = new GestionDB_Art();
+        articulos = gDbArt.crearArrayArticulos();
+        if (articulos != null){
+            try {
+                JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(articulos);
+                if (beanColDataSource == null){
+                    txt_Area.setText("Los datos obtenidos son nulos");
+                }
+                Node source = (Node) event.getSource();
+                Stage stage = (Stage) source.getScene().getWindow();
+                if (stage == null){
+                    txt_Area.setText("No ha podido conseguirse la ventana");
+                }
+                //Declaramos nuestro visor de informes
+                JasperViewerFX viewerfx;
+                viewerfx = new JasperViewerFX(stage, "Stock de Articulos", "/informes/gbarrasArt.jasper",
+                        new HashMap(), beanColDataSource);
 
-            JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(articulos);
-
-            /* Obtiene el botón(origen) desde el cuál se hizo clic para llamar al método
-           generarGráfico y crea un nodo con él*/
-            Node source = (Node) event.getSource();
-            /* A continuación, obtiene la escena a la que pertenece ese botón, y con la escena
-           obtiene la ventana a la que pertenece la misma */
-            Stage stage = (Stage) source.getScene().getWindow();
-
-            /* Al final de la ejecución de las dos líneas anteriores, lo que tenemos en la
-           variable stage es una referencia de la ventana desde la cuál se hizo clic,
-           para que nuestro informe se muestre como una ventana modal asociada a la 
-           ventana que lo invocó */
-            //Declaramos nuestro visor de informes
-            JasperViewerFX viewerfx;
-
-            /* Creamos el visor de informes, pasándole la ventana desde la cual se solicita
-           el informe gráfico, un título para ese informe, la ruta de acceso al informe 
-           gráfico que debe cargar el visor, un objeto HashMap que el visor necesita
-           pero que en este ejercicio no aporta ninguna funcionalidad, y por último nuestro
-           origen de datos representado por el beanColDataSource sobre el cual se creará el
-           informe,  */
-            viewerfx = new JasperViewerFX(stage, "Stock de Articulos", "informes/gbarrasart.jasper",
-                    new HashMap(), beanColDataSource);
-
-            //Mostramos el informe en el visor
-            viewerfx.show();
-
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+                //Mostramos el informe en el visor
+                viewerfx.show();
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+                txt_Area.setText("No ha podido abrirse el visor de informes");
+            }   
+            
+        }else{
+                txt_Area.setText("No han podido conseguirse datos de la base de datos");
         }
 
     }
             
     @FXML
     private void crearInformePed(ActionEvent event){
-        
+        //Definimos la coleccion de datos sobre la que se creará el informe
+        ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
+        GestionDB_Ped gDbPed = new GestionDB_Ped();
+        pedidos = gDbPed.crearArrayPedidos();
+        System.out.println(pedidos.size()+ " pedidos creados correctamente");
+        //Collections.sort(pedidos);
+        if (pedidos != null){
+            try {
+                JRBeanCollectionDataSource beanDataSource = new JRBeanCollectionDataSource(pedidos);
+                if (beanDataSource == null){
+                    txt_Area.setText("Los datos obtenidos son nulos");
+                }
+                Node source = (Node) event.getSource();
+                Stage stage = (Stage) source.getScene().getWindow();
+                if (stage == null){
+                    txt_Area.setText("No ha podido conseguirse la ventana");
+                }
+                //Declaramos nuestro visor de informes
+                JasperViewerFX viewerfx;
+                viewerfx = new JasperViewerFX(stage, "Informe de Pedidos", "/informes/infPedidos.jasper",
+                        new HashMap(), beanDataSource);
+
+                //Mostramos el informe en el visor
+                viewerfx.show();
+                
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+                txt_Area.setText("No ha podido abrirse el visor de informes");   
+            }   
+              
+        }else{
+                txt_Area.setText("No han podido conseguirse datos de la base de datos");
+        }
     }
              
 

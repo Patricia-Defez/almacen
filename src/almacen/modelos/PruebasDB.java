@@ -33,10 +33,7 @@ public class PruebasDB {
         
         ArrayList<Articulo> arrArt = new ArrayList<Articulo>();
         
-       arrArt = gDbArt.crearArrayArticulos();
-       for (Articulo art: arrArt){
-           art.toString();
-       }
+       
     }
     
 }

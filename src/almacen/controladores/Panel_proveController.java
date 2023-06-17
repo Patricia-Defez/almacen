@@ -183,7 +183,7 @@ public class Panel_proveController implements Initializable {
             ArticuloProveedor ArtProv = new ArticuloProveedor();
             ArticuloProveedor ArtProvDB = gDbArtProv.buscarArtProvPorIds(txt_id_prov.getText(),txt_id_Art.getText());
             if(ArtProvDB != null){
-                messages.setText("Ya existe un precio articulo con esa referencia para el proveedor seleccionado");            
+                messages.setText("Ya existe un precio articulo con esa referencia \npara el proveedor seleccionado");            
             }else{
                 ArtProv.setIdArt(txt_id_Art.getText());
                 ArtProv.setIdProv(txt_id_prov.getText());
@@ -253,7 +253,7 @@ public class Panel_proveController implements Initializable {
         GestionDB_ArtProv gDbArtProv = new GestionDB_ArtProv();
         ArticuloProveedor ArtProvDB = gDbArtProv.buscarArtProvPorIds(txt_id_prov.getText(),txt_id_Art.getText());
         if(ArtProvDB == null){
-            messages.setText("No existe un precio articulo con esa referencia para el proveedor seleccionado");
+            messages.setText("No existe un precio articulo con esa referencia \npara el proveedor seleccionado");
             txt_price_art.setText("");             
         }else{
             messages.setText("");
